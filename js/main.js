@@ -18,7 +18,7 @@ $(document).ready(() => {
 
 function getMovies(searchText) {
   $.getJSON(
-  'http:api.themoviedb.org/3/search/movie?query='+searchText+'&api_key=39a80812b9f1a26251532a5fe397d047', function(data){
+  'https:api.themoviedb.org/3/search/movie?query='+searchText+'&api_key=39a80812b9f1a26251532a5fe397d047', function(data){
     console.log(data.results);
     let movies = data.results;
     let output = '';
