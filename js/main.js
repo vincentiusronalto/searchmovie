@@ -26,7 +26,7 @@ function getMovies(searchText) {
       output += `
         <div class="col-md-3">
           <div class="well text-center">
-            <img src="http://image.tmdb.org/t/p/w500/${movie.poster_path}" onerror="this.onerror=null;this.src='https://thumbs.dreamstime.com/t/web-mistake-page-not-found-blue-cute-was-disappointed-monster-white-background-looks-like-does-54518796.jpg';">
+            <img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" onerror="this.onerror=null;this.src='https://thumbs.dreamstime.com/t/web-mistake-page-not-found-blue-cute-was-disappointed-monster-white-background-looks-like-does-54518796.jpg';">
             <h5>${movie.title}</h5>
             <a onclick="movieSelected('${movie.id}')" class="btn btn-primary" href="#">Movie Details</a>
           </div>
