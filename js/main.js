@@ -18,7 +18,7 @@ $(document).ready(() => {
 
 function getMovies(searchText) {
   $.getJSON(
-  'https://cors-anywhere.herokuapp.com/https:api.themoviedb.org/3/search/movie?query='+searchText+'&api_key=39a80812b9f1a26251532a5fe397d047', function(data){
+  'https:api.themoviedb.org/3/search/movie?query='+searchText+'&api_key=39a80812b9f1a26251532a5fe397d047', function(data){
     console.log(data.results);
     let movies = data.results;
     let output = '';
@@ -58,7 +58,7 @@ function movieSelected(id){
 function getMovie(){
   let movieId = sessionStorage.getItem('movieId');
   $.getJSON(
-  'https://cors-anywhere.herokuapp.com/https://api.themoviedb.org/3/movie/'+movieId+'?api_key=39a80812b9f1a26251532a5fe397d047', function(response){
+  'https://api.themoviedb.org/3/movie/'+movieId+'?api_key=39a80812b9f1a26251532a5fe397d047', function(response){
     console.log(response);
     let movie = response;
 
