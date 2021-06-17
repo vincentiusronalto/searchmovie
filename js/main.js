@@ -34,6 +34,7 @@ function getMovies(searchText) {
       `;
     });
     $(".loading").hide();
+    
     if(movies.length > 1){
     $('#movies-counter').html("We found "+movies.length+" movies" );
     }
