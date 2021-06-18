@@ -4,10 +4,28 @@
 }
 @media(min-width:992px){
   #movies .col-md-3 .well {
-    height: 390px;
+    /* height: 390px; */
+    /* margin-bottom: 100px; */
   }
 
   #movies .col-md-3 img {
-    height: 240px;
+    /* height: 240px; */
   }
+}
+
+#movies .col-md-3 .well {
+
+  margin-bottom: 20px;
+}
+
+.input-transparent{
+  background: none;
+  color: white;
+  border: 1px solid rgb(33,38,45);
+}
+
+.input-transparent:focus{
+  background: none;
+  color: white;
+  border: 1px solid rgb(33,38,45);
 }

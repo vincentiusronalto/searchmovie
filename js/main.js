@@ -1,14 +1,14 @@
 $(document).ready(() => {
 
-        $(".loading").hide();
+  // $(".loading").hide();
 
-
-
+  //init trending movie
+  getMovies('','trending');
 
   $('#searchForm').on('submit', e => {
     let searchText = $('#searchText').val().trim();
     if(searchText){
-      $(".loading").show();
+      // $(".loading").show();
       getMovies(searchText);
       e.preventDefault();
     }
@@ -18,35 +18,62 @@ $(document).ready(() => {
 
 //API
 // https://api.themoviedb.org/3/search/movie?query=home&api_key=39a80812b9f1a26251532a5fe397d047
+//title
+//poster_path
+//id
 
-function getMovies(searchText) {
+function getMovies(searchText = '', type = 'search') {
+
+  let apilink = '';
+  if(type === 'search'){
+    apilink = 'https://api.themoviedb.org/3/search/movie?query='+searchText+'&api_key=39a80812b9f1a26251532a5fe397d047';
+  }else if(type == 'trending'){
+    apilink = 'https://api.themoviedb.org/3/trending/all/day?api_key=39a80812b9f1a26251532a5fe397d047';
+  }
+
   $.getJSON(
-  'https://api.themoviedb.org/3/search/movie?query='+searchText+'&api_key=39a80812b9f1a26251532a5fe397d047', function(data){
+    apilink, function(data){
     console.log(data.results);
     let movies = data.results;
     let output = '';
     $.each(movies, (index, movie) => {
+      let movie_title =  (movie.title) ? movie.title : movie.name;
+      // output += `
+      //   <div class="col-md-3">
+      //     <div class="well text-center">
+      //       <img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" onerror="this.onerror=null;this.src='https://thumbs.dreamstime.com/t/web-mistake-page-not-found-blue-cute-was-disappointed-monster-white-background-looks-like-does-54518796.jpg';">
+      //       <h5>${movie_title}</h5>
+      //       <a onclick="movieSelected('${movie.id}')" class="btn btn-primary" href="#">Movie Details</a>
+      //     </div>
+      //   </div>
+      // `;
+
       output += `
         <div class="col-md-3">
           <div class="well text-center">
             <img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" onerror="this.onerror=null;this.src='https://thumbs.dreamstime.com/t/web-mistake-page-not-found-blue-cute-was-disappointed-monster-white-background-looks-like-does-54518796.jpg';">
-            <h5>${movie.title}</h5>
-            <a onclick="movieSelected('${movie.id}')" class="btn btn-primary" href="#">Movie Details</a>
+             <a onclick="movieSelected('${movie.id}')" class="btn btn-primary" href="#">Movie Details</a>
+            
           </div>
         </div>
       `;
     });
-    $(".loading").hide();
+    // $(".loading").hide();
 
-    if(movies.length > 1){
-    $('#movies-counter').html("We found "+movies.length+" movies" );
+    if(type === 'search'){
+      if(movies.length > 1){
+        $('#movies-counter').html("We found "+movies.length+" movies" );
+        }
+        else if(movies.length === 1){
+        $('#movies-counter').html("We found "+movies.length+" movie" );
+        }
+        else if(movies.length === 0){
+        $('#movies-counter').html("We didn't find anything to show here " );
+        }
+    }else{
+      $('#movies-counter').html("Trending of the day " );
     }
-    else if(movies.length === 1){
-    $('#movies-counter').html("We found "+movies.length+" movies" );
-    }
-    else if(movies.length === 0){
-    $('#movies-counter').html("We didn't find anything to show here " );
-    }
+    
     $('#movies').html(output);
   });
 
